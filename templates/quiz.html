@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mock Test</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="navbar">
+    <h2>Mock Test</h2>
+</div>
+
+<form action="/submit" method="POST" class="quiz-container">
+
+{% for q in questions %}
+    <div class="question-card">
+        <h3>{{ loop.index }}. {{ q[1] }}</h3>
+
+        <label><input type="radio" name="{{ q[0] }}" value="A"> {{ q[2] }}</label>
+        <label><input type="radio" name="{{ q[0] }}" value="B"> {{ q[3] }}</label>
+        <label><input type="radio" name="{{ q[0] }}" value="C"> {{ q[4] }}</label>
+        <label><input type="radio" name="{{ q[0] }}" value="D"> {{ q[5] }}</label>
+    </div>
+{% endfor %}
+
+    <div style="text-align:center;">
+        <button type="submit" class="primary-btn">Submit Test</button>
+    </div>
+</form>
+
+</body>
+</html>

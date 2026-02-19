@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload PDF</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="center">
+
+<div class="card">
+    <h2>Upload Mock Test PDF</h2>
+
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+        <input type="file" name="pdf" accept=".pdf" required>
+        <button type="submit" class="primary-btn">Upload</button>
+    </form>
+
+    <br>
+    <a href="/admin" class="secondary-btn">Back to Admin</a>
+</div>
+
+</body>
+</html>
