@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, session
-import psycopg2
+import psycopg
 import os
 from datetime import datetime
 import PyPDF2
@@ -12,10 +12,8 @@ app.secret_key = "supersecretkey"
 DATABASE_URL = os.environ.get("DATABASE_URL")
 
 # ---------------- DATABASE CONNECTION ---------------- #
-
 def connect_db():
-    return psycopg2.connect(DATABASE_URL)
-
+    return psycopg.connect(DATABASE_URL)
 def init_db():
     conn = connect_db()
     cursor = conn.cursor()
@@ -214,4 +212,5 @@ def insert_questions_from_pdf(pdf_path):
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=10000)
+
 
