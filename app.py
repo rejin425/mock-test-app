@@ -129,11 +129,25 @@ def submit():
     questions = cursor.fetchall()
 
     score = 0
+    answer_sheet = []
 
     for q in questions:
         qid = str(q[0])
-        if request.form.get(qid) == q[6]:
+        user_answer = request.form.get(qid)
+        correct_answer = q[6]
+
+        if user_answer == correct_answer:
             score += 1
+
+        answer_sheet.append({
+            "question": q[1],
+            "option1": q[2],
+            "option2": q[3],
+            "option3": q[4],
+            "option4": q[5],
+            "user_answer": user_answer,
+            "correct_answer": correct_answer
+        })
 
     cursor.execute(
         "INSERT INTO results (user_id,score,date) VALUES (%s,%s,%s)",
@@ -143,7 +157,7 @@ def submit():
     conn.commit()
     conn.close()
 
-    return render_template("result.html", score=score)
+    return render_template("result.html", score=score, answers=answer_sheet)
 
 @app.route("/admin")
 def admin():
@@ -212,5 +226,6 @@ def insert_questions_from_pdf(pdf_path):
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=10000)
+
 
 
