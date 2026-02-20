@@ -2,15 +2,35 @@
 <html>
 <head>
     <title>Result</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<body class="center">
+<body>
 
-<div class="card">
-    <h2>Your Score 🎉</h2>
-    <h1 class="score">{{ score }}</h1>
-    <a href="/dashboard" class="primary-btn">Back to Dashboard</a>
-</div>
+<h2>Your Score: {{ score }}</h2>
+
+<h3>Answer Sheet:</h3>
+
+{% for item in answers %}
+<hr>
+<p><strong>Question:</strong> {{ item.question }}</p>
+
+<p>A. {{ item.option1 }}</p>
+<p>B. {{ item.option2 }}</p>
+<p>C. {{ item.option3 }}</p>
+<p>D. {{ item.option4 }}</p>
+
+<p><strong>Your Answer:</strong> {{ item.user_answer }}</p>
+<p><strong>Correct Answer:</strong> {{ item.correct_answer }}</p>
+
+{% if item.user_answer == item.correct_answer %}
+<p style="color:green;"><strong>Correct ✅</strong></p>
+{% else %}
+<p style="color:red;"><strong>Wrong ❌</strong></p>
+{% endif %}
+
+{% endfor %}
+
+<br>
+<a href="/dashboard">Back to Dashboard</a>
 
 </body>
 </html>
