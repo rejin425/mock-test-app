@@ -2,12 +2,28 @@
 <html>
 <head>
     <title>Result</title>
+
+    <script>
+        function toggleAnswers() {
+            var x = document.getElementById("answerSheet");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+    </script>
+
 </head>
 <body>
 
 <h2>Your Score: {{ score }}</h2>
 
-<h3>Answer Sheet:</h3>
+<button onclick="toggleAnswers()">
+    Check Answer Sheet
+</button>
+
+<div id="answerSheet" style="display:none; margin-top:20px;">
 
 {% for item in answers %}
 <hr>
@@ -29,8 +45,11 @@
 
 {% endfor %}
 
-<br>
+</div>
+
+<br><br>
 <a href="/dashboard">Back to Dashboard</a>
 
 </body>
 </html>
+
